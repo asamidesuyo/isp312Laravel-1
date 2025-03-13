@@ -7,9 +7,6 @@
     {{--@dump(\Carbon\Carbon::parse("2030-03-11 13:20:00")->diffForHumans())--}}
 
     <x-box>
-        <x-slot:title>
-            @yield('title')
-        </x-slot:title>
         <form action="{{ route("register.create") }}" method="post">
             @csrf
             <x-form.input name="fio" label="Ваше ФИО" placeholder="Фамилия Имя Отчество" :error="$errors->first('fio')" :value="old('fio')" />

@@ -14,7 +14,8 @@ class RegisterRequest extends FormRequest
 //        "fio" => ["required", "string"],
             "email" => "required|email:rfc|unique:App\Models\User,email",
             "birthday" => "required|date_format:Y-m-d",
-            "password" => ["required", "string", "confirmed", Password::min(4)->letters()->numbers()->uncompromised()],
+//            "password" => ["required", "string", "confirmed", Password::min(4)->letters()->numbers()->uncompromised()],
+            "password" => "required|string|confirmed",
             "password_confirmation" => "required|string"
         ];
     }

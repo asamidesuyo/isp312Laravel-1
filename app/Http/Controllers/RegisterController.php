@@ -9,7 +9,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('index');
+        return view('register');
     }
 
     public function create(RegisterRequest $request)
@@ -28,7 +28,7 @@ class RegisterController extends Controller
         ]);
 
         if($user) {
-            return redirect()->route("register.index");
+            return redirect()->route("login.index");
         } else {
             abort(400);
         }
