@@ -7,16 +7,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("login.index")]) href="{{ route("login.index") }}">Войти</a>
-                    </li>
-                    <li class="nav-item">
-                        <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("register.index")]) href="{{ route("register.index") }}">Регистрация</a>
-                    </li>
+{{--                    @auth--}}
+{{--                        <li class="nav-item nav-link">Авторизован</li>--}}
+{{--                    @else--}}
+{{--                        <li class="nav-item nav-link">Войдите</li>--}}
+{{--                    @endauth--}}
+
+{{--                    @guest--}}
+{{--                            <li class="nav-item nav-link">Вы гость</li>--}}
+{{--                    @endguest--}}
+                    @guest
+                        <li class="nav-item">
+                            <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("login.index")]) href="{{ route("login.index") }}">Войти</a>
+                        </li>
+                        <li class="nav-item">
+                            <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("register.index")]) href="{{ route("register.index") }}">Регистрация</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("orders.index")]) href="{{ route("orders.index") }}">Заказы</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route("login.logout") }}" class="nav-link">Выход</a>
+                        </li>
+                    @endguest
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-@dump(\Illuminate\Support\Facades\Auth::user())
+{{--@dump(\Illuminate\Support\Facades\Auth::user())--}}

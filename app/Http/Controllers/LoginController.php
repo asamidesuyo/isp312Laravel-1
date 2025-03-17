@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($data)) {
             //Пользователь авторизован
-            return redirect()->route("register.index");
+            return redirect()->route("profile.index");
         } else {
             // Отправлен неверный логин или пароль
             return redirect()->back()->withErrors([
@@ -27,5 +27,13 @@ class LoginController extends Controller
                 "password" => "Неверный логин или пароль!"
             ]);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route("login.index");
     }
 }
