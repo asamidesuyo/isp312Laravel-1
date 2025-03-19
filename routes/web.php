@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/orders')->name("orders.")->group(function () {
         Route::get('/', [OrderController::class, "index"])->name("index");
         Route::get('/destroy/{order}', [OrderController::class, "destroy"])->whereNumber("order")->name("destroy");
+        Route::get('/create', [OrderController::class, "create"])->name("create");
+        Route::post("/create", [OrderController::class, "store"])->name("store");
+        Route::get('/{order}', [OrderController::class, "show"])->whereNumber("order")->name("show");
     });
 });
 
