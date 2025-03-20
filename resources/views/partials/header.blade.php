@@ -24,8 +24,18 @@
                             <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("register.index")]) href="{{ route("register.index") }}">Регистрация</a>
                         </li>
                     @else
+                        @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                            <li class="nav-item">
+                                <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("admin.orders.index")]) href="{{ route("admin.orders.index") }}">Панель администратора</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("orders.index")]) href="{{ route("orders.index") }}">Заказы</a>
+                            </li>
+                        @endif
+
                         <li class="nav-item">
-                            <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("orders.index")]) href="{{ route("orders.index") }}">Заказы</a>
+                            <a @class(["nav-link","active" => \Illuminate\Support\Facades\Route::is("profile.index")]) href="{{ route("profile.index") }}">Личный кабинет</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route("login.logout") }}" class="nav-link">Выход</a>

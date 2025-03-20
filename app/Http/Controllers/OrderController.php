@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Order\StatusEnum;
 use App\Http\Requests\Order\OrderRequest;
 use App\Models\Category;
 use App\Models\Order;
@@ -61,6 +62,10 @@ class OrderController extends Controller
 //        Order::where("id", $order)->delete();
         if($order->user_id !== Auth::id()) {
             abort(404);
+        }
+
+        if($order->status !== StatusEnum::new) {
+            abort(403);
         }
 
         if ($order->delete()) {

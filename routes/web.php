@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\NotAdmin;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
@@ -32,12 +35,18 @@ Route::middleware('auth')->group(function () {
         Route::post('/password/update', [ProfileController::class, "updatePassword"])->name("password.update");
     });
 
-    Route::prefix('/orders')->name("orders.")->group(function () {
+    Route::middleware(NotAdmin::class)->prefix('/orders')->name("orders.")->group(function () {
         Route::get('/', [OrderController::class, "index"])->name("index");
         Route::get('/destroy/{order}', [OrderController::class, "destroy"])->whereNumber("order")->name("destroy");
         Route::get('/create', [OrderController::class, "create"])->name("create");
         Route::post("/create", [OrderController::class, "store"])->name("store");
         Route::get('/{order}', [OrderController::class, "show"])->whereNumber("order")->name("show");
+    });
+
+    Route::middleware(Admin::class)->prefix("/admin")->name("admin.")->group(function () {
+        Route::get("/orders", [AdminController::class, "index"])->name("orders.index");
+        Route::get("/orders/destroy/{order}", [AdminController::class, "destroy"])->whereNumber("order")->name("orders.destroy");
+        Route::get("/orders/edit/{order}", [AdminController::class, "edit"])->whereNumber("order")->name("orders.edit");
     });
 });
 

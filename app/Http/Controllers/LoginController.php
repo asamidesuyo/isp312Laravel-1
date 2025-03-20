@@ -19,7 +19,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($data)) {
             //Пользователь авторизован
-            return redirect()->route("profile.index");
+            if(Auth::user()->is_admin) {
+                return redirect()->route("admin.orders.index");
+            } else {
+                return redirect()->route("orders.index");
+            }
         } else {
             // Отправлен неверный логин или пароль
             return redirect()->back()->withErrors([

@@ -37,6 +37,7 @@ class User extends Authenticatable
         return [
             'birthday' => 'date',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 
