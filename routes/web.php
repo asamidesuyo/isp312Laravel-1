@@ -50,5 +50,8 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::patch('/admin/orders/{order}', [AdminController::class, 'update'])
+    ->name('admin.orders.update');
+
 
 

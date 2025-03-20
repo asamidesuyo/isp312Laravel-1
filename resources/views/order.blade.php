@@ -51,3 +51,16 @@
     </x-box>
 
 @endsection
+
+
+<form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST">
+    @csrf
+    @method('PATCH')
+    <select name="status" class="form-control">
+        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Ожидание</option>
+        <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>В обработке</option>
+        <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Завершен</option>
+        <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Отменен</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Обновить</button>
+</form>
