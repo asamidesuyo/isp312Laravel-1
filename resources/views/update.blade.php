@@ -15,9 +15,6 @@
                 <option value="Выполнен" {{ $order->status->value === 'Выполнен' ? 'selected' : '' }}>Выполнен</option>
                 <option value="Отклонен" {{ $order->status->value === 'Отклонен' ? 'selected' : '' }}>Отклонен</option>
             </select>
-
-
-
             <x-form.textarea name="description" label="Описание заказа" placeholder="Описание"
                              :error="$errors->first('description')" :value="$order->description" />
 
